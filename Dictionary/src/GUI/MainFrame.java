@@ -1,10 +1,15 @@
 package GUI;
 
+import Business.WorldHandler;
+import DTO.Dictionary;
+import Data.TextDataHelper;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 public class MainFrame {
     private JFrame jFrame;
@@ -36,17 +41,25 @@ public class MainFrame {
     private JPanel rightPanel;
     private JTextArea meaningTextArea;
     private JTextField findingTextField;
+    private JScrollPane iconListScrollPane;
     private JList<String> iconList;
+    private DefaultListModel<String> listIcon;
+    private Dictionary dictionary;
 
-    public MainFrame() {
+    public MainFrame() throws IOException {
         initComponents();
+        dictionary = new Dictionary();
+        listIcon = new DefaultListModel<>();
+
+        dictionary = TextDataHelper.loadResource(listIcon);
+        listIcon = WorldHandler.getModel(dictionary);
+        WorldHandler.loadWordsToList(listIcon, iconList);
     }
 
     public void initComponents() {
         jFrame = new JFrame("Dictionary");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setBounds(100, 100, 1200, 650);
-        jFrame.setResizable(false);
+        jFrame.setBounds(500, 200, 1200, 650);
         jFrame.setLayout(new BorderLayout());
 
         menuBar = new JMenuBar();
@@ -88,15 +101,14 @@ public class MainFrame {
         exportIconItem.setPreferredSize(new Dimension(120, 20));
         exportIconItem.setIcon(new ImageIcon(getClass().getResource("/Images/share.png")));
 
+        editIconItem = new JMenuItem("Edit Icon");
+        editIconItem.setPreferredSize(new Dimension(120, 20));
+        editIconItem.setIcon(new ImageIcon(getClass().getResource("/Images/edit.png")));
+
         aboutIconItem = new JMenuItem("About");
         aboutIconItem.setPreferredSize(new Dimension(120, 20));
         aboutIconItem.setIcon(new ImageIcon(getClass().getResource("/Images/question.png")));
-        aboutIconItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Dictionary Ver 1.0 \nCopyright(C) 2019 \nCao Minh Duc","About Dictionary" ,JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
+        aboutIconItem.addActionListener(this::aboutButtonActionPerformed);
 
         fileMenu.add(historyItem);
         fileMenu.add(saveAllItem);
@@ -105,6 +117,7 @@ public class MainFrame {
         editMenu.add(addIconItem);
         editMenu.add(removeIconItem);
         editMenu.add(renameIconItem);
+        editMenu.add(editIconItem);
         editMenu.add(exportIconItem);
 
         helpMenu.add(aboutIconItem);
@@ -146,12 +159,7 @@ public class MainFrame {
         aboutButton = new JButton(new ImageIcon(getClass().getResource("/Images/question (1).png")));
         aboutButton.setPreferredSize(new Dimension(40, 40));
         aboutButton.setToolTipText("About");
-        aboutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Dictionary Ver 1.0 \nCopyright(C) 2019 \nCao Minh Duc","About Dictionary" ,JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
+        aboutButton.addActionListener(this::aboutButtonActionPerformed);
 
         toolBar.add(findButton);
         toolBar.add(addIconButton);
@@ -173,10 +181,11 @@ public class MainFrame {
         findingTextField.setMaximumSize(new Dimension(45, 35));
         leftPanel.add(findingTextField, BorderLayout.PAGE_START);
 
+        iconListScrollPane = new JScrollPane(iconList);
         iconList = new JList<>();
         iconList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        iconList.setPreferredSize(new Dimension(100, 100));
-        leftPanel.add(iconList, BorderLayout.CENTER);
+        iconListScrollPane.setViewportView(iconList);
+        leftPanel.add(iconListScrollPane, BorderLayout.CENTER);
 
         rightPanel = new JPanel();
         rightPanel.setLayout(new GridLayout(1,1, 25, 0));
@@ -193,6 +202,10 @@ public class MainFrame {
         jFrame.setJMenuBar(menuBar);
         jFrame.getContentPane().add(toolBar, BorderLayout.PAGE_START);
         jFrame.getContentPane().add(centerPanel, BorderLayout.CENTER);
+    }
+
+    public void aboutButtonActionPerformed(ActionEvent event) {
+        JOptionPane.showMessageDialog(null, "Dictionary Ver 1.0 \nCopyright(C) 2019 \nCao Minh Duc","About Dictionary" ,JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void main(String[] args) {
@@ -217,7 +230,12 @@ public class MainFrame {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                MainFrame windows = new MainFrame();
+                MainFrame windows = null;
+                try {
+                    windows = new MainFrame();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 windows.jFrame.setVisible(true);
             }
         });
