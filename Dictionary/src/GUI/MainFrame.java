@@ -5,11 +5,15 @@ import DTO.Dictionary;
 import Data.TextDataHelper;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainFrame {
     private JFrame jFrame;
@@ -45,6 +49,7 @@ public class MainFrame {
     private JList<String> iconList;
     private DefaultListModel<String> listIcon;
     private Dictionary dictionary;
+    private List<String> list;
 
     public MainFrame() throws IOException {
         initComponents();
@@ -54,6 +59,15 @@ public class MainFrame {
         dictionary = TextDataHelper.loadResource(listIcon);
         listIcon = WorldHandler.getModel(dictionary);
         WorldHandler.loadWordsToList(listIcon, iconList);
+
+        list = new ArrayList<>();
+        for (int i = 0; i < listIcon.getSize(); i++) {
+            try {
+                list.add(listIcon.getElementAt(i));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public void initComponents() {
@@ -176,16 +190,67 @@ public class MainFrame {
         leftPanel = new JPanel();
         leftPanel.setLayout(new BorderLayout(0, 5));
 
-        findingTextField = new JTextField();
-        findingTextField.setPreferredSize(new Dimension(45, 35));
-        findingTextField.setMaximumSize(new Dimension(45, 35));
-        leftPanel.add(findingTextField, BorderLayout.PAGE_START);
-
         iconListScrollPane = new JScrollPane(iconList);
         iconList = new JList<>();
         iconList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         iconListScrollPane.setViewportView(iconList);
         leftPanel.add(iconListScrollPane, BorderLayout.CENTER);
+
+        iconList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                String icon = "";
+                int index = iconList.getSelectedIndex();
+                if (index != -1) {
+                    icon = iconList.getModel().getElementAt(index);
+                }
+                meaningTextArea.setText(dictionary.getValue(icon));
+            }
+        });
+
+        findingTextField = new JTextField();
+        findingTextField.setPreferredSize(new Dimension(45, 35));
+        findingTextField.setMaximumSize(new Dimension(45, 35));
+        leftPanel.add(findingTextField, BorderLayout.PAGE_START);
+
+        findingTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filter((DefaultListModel) iconList.getModel());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filter((DefaultListModel) iconList.getModel());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+
+            private void filter(DefaultListModel model) {
+                model =( DefaultListModel) createDefaultModel();
+                iconList.setModel(model);
+                meaningTextArea.setText("");
+                String filter = findingTextField.getText();
+                if (filter.length() != 0) {
+                    for (String s : list) {
+                        if (!s.startsWith(filter)) {
+                            if (model.contains(s)) {
+                                model.removeElement(s);
+                            }
+                        } else {
+                            if (!model.contains(s)) {
+                                model.addElement(s);
+                            }
+                        }
+                    }
+                    meaningTextArea.setText(dictionary.getValue(filter));
+                    iconList.setModel(model);
+                }
+            }
+        });
 
         rightPanel = new JPanel();
         rightPanel.setLayout(new GridLayout(1,1, 25, 0));
@@ -206,6 +271,19 @@ public class MainFrame {
 
     public void aboutButtonActionPerformed(ActionEvent event) {
         JOptionPane.showMessageDialog(null, "Dictionary Ver 1.0 \nCopyright(C) 2019 \nCao Minh Duc","About Dictionary" ,JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public JList createTempJList() {
+        JList list = new JList(createDefaultModel());
+        return list;
+    }
+
+    public ListModel<String> createDefaultModel() {
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for (int i = 0; i < list.size(); i++) {
+            model.addElement(list.get(i));
+        }
+        return model;
     }
 
     public static void main(String[] args) {

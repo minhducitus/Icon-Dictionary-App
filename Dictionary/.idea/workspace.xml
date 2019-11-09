@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="265f04c2-3cf5-4d5a-a0ea-2232cf5ecd5f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Business/WorldHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DTO/Dictionary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Data/TextDataHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$4.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/META-INF/Dictionary.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainFrame.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,7 +34,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -105,6 +100,11 @@
       <workItem from="1573048094486" duration="5729000" />
       <workItem from="1573056259518" duration="602000" />
       <workItem from="1573109037425" duration="31000" />
+      <workItem from="1573187854839" duration="126000" />
+      <workItem from="1573240573204" duration="44000" />
+      <workItem from="1573262565069" duration="8829000" />
+      <workItem from="1573301220732" duration="2668000" />
+      <workItem from="1573310059355" duration="5234000" />
     </task>
     <servers />
   </component>
