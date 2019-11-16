@@ -11,9 +11,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Consumer;
 
 public class MainFrame {
     private JFrame jFrame;
@@ -50,8 +55,10 @@ public class MainFrame {
     private DefaultListModel<String> listIcon;
     private Dictionary dictionary;
     private List<String> list;
+    private Set<String> historySet;
 
     public MainFrame() throws IOException {
+        historySet = new HashSet<>();
         initComponents();
         dictionary = new Dictionary();
         listIcon = new DefaultListModel<>();
@@ -73,7 +80,7 @@ public class MainFrame {
     public void initComponents() {
         jFrame = new JFrame("Dictionary");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setBounds(500, 200, 1200, 650);
+        jFrame.setBounds(300, 200, 1100, 550);
         jFrame.setLayout(new BorderLayout());
 
         menuBar = new JMenuBar();
@@ -149,26 +156,123 @@ public class MainFrame {
         addIconButton = new JButton(new ImageIcon(getClass().getResource("/Images/add (1).png")));
         addIconButton.setPreferredSize(new Dimension(40, 40));
         addIconButton.setToolTipText("Add Icon");
+        addIconButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Consumer<List<String>> consumer = s ->
+                {
+                    list.add(s.get(0));
+                    dictionary.add(s.get(0), s.get(1));
+                    listIcon = WorldHandler.getModel(dictionary);
+                    WorldHandler.loadWordsToList(listIcon, iconList);
+                    iconList.updateUI();
+                };
+                AddIconGUI addIconGUI = new AddIconGUI(consumer);
+            }
+        });
 
         removeIconButton = new JButton(new ImageIcon(getClass().getResource("/Images/delete (1).png")));
         removeIconButton.setPreferredSize(new Dimension(40, 40));
         removeIconButton.setToolTipText("Remove Icon");
+        removeIconButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = iconList.getSelectedIndex();
+                String needle = iconList.getSelectedValue();
+                dictionary.delete(needle);
+                list.remove(needle);
+                DefaultListModel<String> newList = (DefaultListModel<String>) iconList.getModel();
+                newList.remove(index);
+                iconList.setModel(newList);
+                JOptionPane.showMessageDialog(null, "Icon " + needle + " is deleted!");
+            }
+        });
 
         editIconButton = new JButton(new ImageIcon(getClass().getResource("/Images/edit (1).png")));
         editIconButton.setPreferredSize(new Dimension(40, 40));
         editIconButton.setToolTipText("Edit Icon");
+        editIconButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String needle = iconList.getSelectedValue();
+                    String meaning = dictionary.getValue(needle);
+                    List<String> dummyList = new ArrayList<>();
+                    Consumer<List<String>> consumer = c -> {
+                        String newMeaning  = c.get(0);
+                        dictionary.replace(needle, newMeaning);
+                        listIcon = WorldHandler.getModel(dictionary);
+                        WorldHandler.loadWordsToList(listIcon, iconList);
+                    };
+                    EditIconGUI edit = new EditIconGUI(consumer, needle, meaning);
+                } catch (Exception e1) {
+                    JOptionPane.showMessageDialog(null, "Please Select Icon To Edit");
+                }
+            }
+        });
 
         renameIconButton = new JButton(new ImageIcon(getClass().getResource("/Images/document (1).png")));
         renameIconButton.setPreferredSize(new Dimension(40, 40));
         renameIconButton.setToolTipText("Rename Icon");
+        renameIconButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = iconList.getSelectedIndex();
+                if (index == -1) {
+                    JOptionPane.showMessageDialog(null, "Please Select An Icon To Rename");
+                } else {
+                    String iconName = JOptionPane.showInputDialog("Icon Old Name Is: " + iconList.getSelectedValue() + ", Please Input New Icon Name!");
+                    String meaning = dictionary.getValue(iconList.getSelectedValue());
+                    dictionary.delete(iconList.getSelectedValue());
+                    list.remove(iconList.getSelectedValue());
+                    list.add(iconName);
+                    dictionary.add(iconName, meaning);
+                    listIcon = WorldHandler.getModel(dictionary);
+                    WorldHandler.loadWordsToList(listIcon, iconList);
+                }
+            }
+        });
 
         historyButton = new JButton(new ImageIcon(getClass().getResource("/Images/history (1).png")));
         historyButton.setPreferredSize(new Dimension(40, 40));
         historyButton.setToolTipText("History");
+        historyButton.addActionListener(new ActionListener() {
+            int clicked = 0;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clicked++;
+                if (clicked % 2 == 0 && clicked != 0) {
+                    DefaultListModel<String> model = (DefaultListModel<String>) createDefaultModel();
+                    iconList.setModel(model);
+                } else {
+                    DefaultListModel<String> historyModel = new DefaultListModel<>();
+                    for (String icon : historySet) {
+                        historyModel.addElement(icon);
+                    }
+                    iconList.setModel(historyModel);
+                }
+            }
+        });
 
         exportButton = new JButton(new ImageIcon(getClass().getResource("/Images/share (1).png")));
         exportButton.setPreferredSize(new Dimension(40, 40));
         exportButton.setToolTipText("Export Icon");
+        exportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("ExportedIcon.txt", true));
+                    String iconName = iconList.getSelectedValue();
+                    String meaning = dictionary.getValue(iconName);
+                    String content = iconName + " " + meaning;
+                    writer.write(content);
+                    writer.write("\n");
+                    writer.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
         aboutButton = new JButton(new ImageIcon(getClass().getResource("/Images/question (1).png")));
         aboutButton.setPreferredSize(new Dimension(40, 40));
@@ -202,6 +306,7 @@ public class MainFrame {
                 String icon = "";
                 int index = iconList.getSelectedIndex();
                 if (index != -1) {
+                    historySet.add(iconList.getSelectedValue());
                     icon = iconList.getModel().getElementAt(index);
                 }
                 meaningTextArea.setText(dictionary.getValue(icon));
@@ -232,7 +337,6 @@ public class MainFrame {
             private void filter(DefaultListModel model) {
                 model =( DefaultListModel) createDefaultModel();
                 iconList.setModel(model);
-                meaningTextArea.setText("");
                 String filter = findingTextField.getText();
                 if (filter.length() != 0) {
                     for (String s : list) {
@@ -246,9 +350,10 @@ public class MainFrame {
                             }
                         }
                     }
-                    meaningTextArea.setText(dictionary.getValue(filter));
-                    iconList.setModel(model);
                 }
+                iconList.setSelectedIndex(0);
+                iconList.ensureIndexIsVisible(iconList.getSelectedIndex());
+                iconList.setModel(model);
             }
         });
 
@@ -273,9 +378,8 @@ public class MainFrame {
         JOptionPane.showMessageDialog(null, "Dictionary Ver 1.0 \nCopyright(C) 2019 \nCao Minh Duc","About Dictionary" ,JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public JList createTempJList() {
-        JList list = new JList(createDefaultModel());
-        return list;
+    public void deleteButtonActionPerformed(ActionEvent event) {
+
     }
 
     public ListModel<String> createDefaultModel() {

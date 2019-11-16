@@ -2,18 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="265f04c2-3cf5-4d5a-a0ea-2232cf5ecd5f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/AddIconGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/EditIconGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/Business/WorldHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/Business/WorldHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/DTO/Dictionary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/DTO/Dictionary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/Data/TextDataHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/Data/TextDataHelper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTO/Dictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/Dictionary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VE-Dictionary/data/Favorites_EV.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VE-Dictionary/data/Favorites_EV.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VE-Dictionary/data/Favorites_VE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VE-Dictionary/data/Favorites_VE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VE-Dictionary/data/statitisticEV.ini" beforeDir="false" afterPath="$PROJECT_DIR$/../VE-Dictionary/data/statitisticEV.ini" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="209" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -49,6 +62,19 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.MainFrame">
+    <configuration name="AddIconGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI.AddIconGUI" />
+      <module name="Dictionary" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GUI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI.MainFrame" />
       <module name="Dictionary" />
@@ -78,6 +104,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.AddIconGUI" />
         <item itemvalue="Application.TextDataHelper" />
       </list>
     </recent_temporary>
@@ -105,6 +132,23 @@
       <workItem from="1573262565069" duration="8829000" />
       <workItem from="1573301220732" duration="2668000" />
       <workItem from="1573310059355" duration="5234000" />
+      <workItem from="1573305168719" duration="360000" />
+      <workItem from="1573422134689" duration="1481000" />
+      <workItem from="1573465704308" duration="3061000" />
+      <workItem from="1573475984198" duration="26000" />
+      <workItem from="1573646493360" duration="694000" />
+      <workItem from="1573729397755" duration="303000" />
+      <workItem from="1573748906403" duration="28000" />
+      <workItem from="1573752122010" duration="3161000" />
+      <workItem from="1573783513081" duration="870000" />
+      <workItem from="1573784401980" duration="4203000" />
+      <workItem from="1573801702203" duration="2349000" />
+      <workItem from="1573806965264" duration="258000" />
+      <workItem from="1573827991899" duration="4360000" />
+      <workItem from="1573882327448" duration="1944000" />
+      <workItem from="1573891032532" duration="1396000" />
+      <workItem from="1573893486974" duration="1033000" />
+      <workItem from="1573908367877" duration="4877000" />
     </task>
     <servers />
   </component>
@@ -123,5 +167,19 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="dictionary.getValue(&quot;minhduc&quot;)" language="JAVA" />
+        <watch expression="listIcon.indexOf(&quot;minhduc&quot;)" language="JAVA" />
+        <watch expression="listIcon.getElementAt(673)" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Dictionary$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1573909761131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>GUI.*</FILTER>
+    </SUITE>
   </component>
 </project>

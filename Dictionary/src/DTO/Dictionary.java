@@ -1,42 +1,46 @@
 package DTO;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class Dictionary {
-    private HashMap<String, String> hashMap;
+    private TreeMap<String, String> treeMap;
 
     public Dictionary() {
-        hashMap = new HashMap<>();
+        treeMap = new TreeMap<>();
     }
 
     public void add(String key, String value) {
-        hashMap.put(key, value);
+        treeMap.put(key, value);
     }
 
     public void delete(String key) {
-        hashMap.remove(key);
+        treeMap.remove(key);
     }
 
     public String getValue(String key) {
-        return hashMap.get(key);
+        return treeMap.get(key);
+    }
+
+    public void replace(String key, String value) {
+        treeMap.replace(key, value);
     }
 
     public int getNumWords() {
-        return hashMap.size();
+        return treeMap.size();
     }
 
     public boolean isEmpty() {
-        return hashMap.isEmpty();
+        return treeMap.isEmpty();
     }
 
     public Set getKeySet() {
-        return hashMap.keySet();
+        return treeMap.keySet();
     }
 
     public void showRecordInMap() {
-        for (Map.Entry<String, String> entry : this.hashMap.entrySet()) {
+        for (Map.Entry<String, String> entry : this.treeMap.entrySet()) {
             System.out.println("Key = " + entry.getKey() + " Value = " + entry.getValue());
         }
     }
