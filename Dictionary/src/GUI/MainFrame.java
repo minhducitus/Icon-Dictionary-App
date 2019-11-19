@@ -196,10 +196,12 @@ public class MainFrame {
                     }
                 } else {
                     String icon = JOptionPane.showInputDialog(null, "Please Input Icon Name To Find");
-                    for (int i = 0; i < list.size(); i++) {
-                        if (icon.equals(list.get(i))) {
-                            iconList.setSelectedIndex(i);
-                            iconList.ensureIndexIsVisible(iconList.getSelectedIndex());
+                    if ((icon != null) && (icon.length() > 0)) {
+                        for (int i = 0; i < list.size(); i++) {
+                            if (icon.equals(list.get(i))) {
+                                iconList.setSelectedIndex(i);
+                                iconList.ensureIndexIsVisible(iconList.getSelectedIndex());
+                            }
                         }
                     }
                 }

@@ -3,16 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="265f04c2-3cf5-4d5a-a0ea-2232cf5ecd5f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/Business/WorldHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/Business/WorldHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/Data/TextDataHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/Data/TextDataHelper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame$9.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Dictionary/GUI/MainFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../VE-Dictionary/data/Favorites_EV.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VE-Dictionary/data/Favorites_EV.xml" afterDir="false" />
@@ -150,7 +146,10 @@
       <workItem from="1573893486974" duration="1033000" />
       <workItem from="1573908367877" duration="4877000" />
       <workItem from="1573957245589" duration="4315000" />
-      <workItem from="1573972615908" duration="4610000" />
+      <workItem from="1573972615908" duration="4730000" />
+      <workItem from="1573997690697" duration="1955000" />
+      <workItem from="1574037515570" duration="40000" />
+      <workItem from="1574176075508" duration="328000" />
     </task>
     <servers />
   </component>
