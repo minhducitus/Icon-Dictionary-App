@@ -1,5 +1,9 @@
 package DTO;
 
+import com.sun.source.tree.Tree;
+
+import javax.swing.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -13,6 +17,16 @@ public class Dictionary {
 
     public void add(String key, String value) {
         treeMap.put(key, value);
+    }
+
+    public boolean addWithCheck(String key, String value) {
+        if (this.treeMap.containsKey(key)) {
+            JOptionPane.showMessageDialog(null, "duplicate is not prohibited");
+            return false;
+        } else {
+            treeMap.put(key, value);
+            return true;
+        }
     }
 
     public void delete(String key) {

@@ -40,7 +40,6 @@ public class AddIconGUI {
                     args.add(iconNameTextField.getText());
                     args.add(meanTextField.getText());
                     consumer.accept(args);
-                    JOptionPane.showMessageDialog(null, "Added");
                     jFrame.setVisible(false);
                     jFrame.dispose();
                 }

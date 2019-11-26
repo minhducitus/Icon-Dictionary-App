@@ -403,11 +403,13 @@ public class MainFrame {
     public void addButtonActionPerformed(ActionEvent event) {
         Consumer<List<String>> consumer = s ->
         {
-            list.add(s.get(0));
-            dictionary.add(s.get(0), s.get(1));
-            listIcon = WorldHandler.getModel(dictionary);
-            WorldHandler.loadWordsToList(listIcon, iconList);
-            iconList.updateUI();
+            if (dictionary.addWithCheck(s.get(0), s.get(1)) == true) {
+                list.add(s.get(0));
+                listIcon = WorldHandler.getModel(dictionary);
+                WorldHandler.loadWordsToList(listIcon, iconList);
+                iconList.updateUI();
+                JOptionPane.showMessageDialog(null, "Added");
+            }
         };
         AddIconGUI addIconGUI = new AddIconGUI(consumer);
     }
@@ -436,6 +438,7 @@ public class MainFrame {
             writer.write(content);
             writer.write("\n");
             writer.close();
+            JOptionPane.showMessageDialog(null, "Icon Exported!");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Select Icon To Export");
         }
